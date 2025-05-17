@@ -1,0 +1,705 @@
+/* 基础变量与重置 */
+:root {
+    --bg-dark: #121212;
+    --bg-darker: #0a0a0a;
+    --bg-light: #1e1e1e;
+    --primary: #00b894;
+    --primary-dark: #008c6d;
+    --accent: #6c5ce7;
+    --accent-dark: #5649c0;
+    --text-primary: #ffffff;
+    --text-secondary: #b3b3b3;
+    --text-muted: #888888;
+    --success: #00b894;
+    --warning: #fdcb6e;
+    --danger: #ff7675;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    line-height: 1.6;
+  }
+  
+  /* 导航栏 */
+  .minecraft-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 5%;
+    background-color: var(--bg-darker);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  
+  .logo-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .logo-container img {
+    transition: transform 0.3s;
+  }
+  
+  .logo-container img:hover {
+    transform: rotate(5deg);
+  }
+  
+  .minecraft-header h1 {
+    color: var(--primary);
+    font-size: 1.8rem;
+    font-weight: 600;
+    text-shadow: 0 0 8px rgba(0, 184, 148, 0.3);
+  }
+  
+  .main-nav {
+    display: flex;
+    gap: 2rem;
+  }
+  
+  .main-nav a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;
+    transition: color 0.3s;
+  }
+  
+  .main-nav a:hover {
+    color: var(--primary);
+  }
+  
+  .main-nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary);
+    transition: width 0.3s;
+  }
+  
+  .main-nav a:hover::after {
+    width: 100%;
+  }
+  
+  .mobile-menu-btn {
+    display: none;
+    color: var(--text-secondary);
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  
+  /* 英雄区域 */
+  .hero-section {
+    padding: 6rem 5% 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 80vh;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 70% 30%, rgba(0, 184, 148, 0.1) 0%, transparent 50%);
+    z-index: -1;
+  }
+  
+  .hero-content {
+    max-width: 600px;
+  }
+  
+  .hero-section h2 {
+    font-size: 3rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+  }
+  
+  .hero-section p {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+  }
+  
+  .server-stats {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+  }
+  
+  .stat-box {
+    background-color: var(--bg-light);
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  }
+  
+  .stat-box i {
+    color: var(--primary);
+    font-size: 1.2rem;
+  }
+  
+  .stat-box span {
+    font-weight: 500;
+  }
+  
+  .mc-button {
+    display: inline-block;
+    background-color: var(--primary);
+    color: white;
+    padding: 1rem 2.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 184, 148, 0.2);
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .mc-button:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 184, 148, 0.3);
+  }
+  
+  .hero-mc-icon {
+    position: relative;
+  }
+  
+  .diamond-shape {
+    width: 200px;
+    height: 200px;
+    background-color: rgba(0, 184, 148, 0.1);
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    transform: rotate(45deg);
+    animation: pulse 4s infinite ease-in-out;
+  }
+  
+  @keyframes pulse {
+    0% { transform: rotate(45deg) scale(1); opacity: 0.8; }
+    50% { transform: rotate(45deg) scale(1.1); opacity: 1; }
+    100% { transform: rotate(45deg) scale(1); opacity: 0.8; }
+  }
+  
+  /* 子服列表 */
+  .servers-section {
+    padding: 5rem 5%;
+    background-color: var(--bg-darker);
+  }
+  
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 3rem;
+    color: var(--text-primary);
+    text-align: center;
+    position: relative;
+  }
+  
+  .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background-color: var(--primary);
+    border-radius: 2px;
+  }
+  
+  .servers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .server-card {
+    background-color: var(--bg-light);
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  
+  .server-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+  }
+  
+  .server-card.survival::before {
+    background-color: var(--success);
+  }
+  
+  .server-card.skyblock::before {
+    background-color: var(--accent);
+  }
+  
+  .server-card.minigame::before {
+    background-color: var(--warning);
+  }
+  
+  .server-card.rpg::before {
+    background-color: #a29bfe;
+  }
+  
+  .server-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+  }
+  
+  .server-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: white;
+    transition: transform 0.3s;
+  }
+  
+  .server-card:hover .server-icon {
+    transform: rotate(15deg) scale(1.1);
+  }
+  
+  .server-card.survival .server-icon {
+    background-color: var(--success);
+  }
+  
+  .server-card.skyblock .server-icon {
+    background-color: var(--accent);
+  }
+  
+  .server-card.minigame .server-icon {
+    background-color: var(--warning);
+  }
+  
+  .server-card.rpg .server-icon {
+    background-color: #6c5ce7;
+  }
+  
+  .server-card h3 {
+    margin: 1rem 0;
+    font-size: 1.5rem;
+    color: var(--text-primary);
+  }
+  
+  .server-card p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+  
+  /* 特色区域 */
+  .features-section {
+    padding: 5rem 5%;
+    background-color: var(--bg-dark);
+  }
+  
+  .features-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .feature {
+    background-color: var(--bg-light);
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    transition: transform 0.3s;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  
+  .feature:hover {
+    transform: translateY(-5px);
+  }
+  
+  .feature-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: white;
+  }
+  
+  .diamond-bg {
+    background-color: var(--success);
+  }
+  
+  .emerald-bg {
+    background-color: #00b894;
+  }
+  
+  .gold-bg {
+    background-color: var(--warning);
+  }
+  
+  .redstone-bg {
+    background-color: var(--danger);
+  }
+  
+  .feature h3 {
+    margin: 1rem 0;
+    font-size: 1.3rem;
+    color: var(--text-primary);
+  }
+  
+  .feature p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+  }
+  
+  /* 用户协议 */
+  #rules {
+    padding: 5rem 5%;
+    background-color: var(--bg-darker);
+  }
+  
+  #rules .join-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    background-color: var(--bg-light);
+    padding: 3rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  
+  #rules h1 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: var(--text-primary);
+    text-align: center;
+  }
+  
+  #rules pre {
+    white-space: pre-wrap;
+    font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    font-size: 1rem;
+  }
+  
+  #rules h1 {
+    font-size: 1.5rem;
+    margin: 1.5rem 0 1rem;
+    color: var(--primary);
+  }
+  
+  /* 加入区域 */
+  .join-section {
+    padding: 5rem 5%;
+    background: linear-gradient(135deg, var(--bg-darker) 0%, var(--bg-dark) 100%);
+  }
+  
+  .join-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 5rem;
+  }
+  
+  .join-info {
+    flex: 1;
+  }
+  
+  .join-info h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    font-weight: 600;
+  }
+  
+  .join-info p {
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+  }
+  
+  .server-address {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    margin: 2rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 400px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  
+  .server-address span {
+    font-family: monospace;
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+  
+  .server-address button {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.5rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-weight: 500;
+  }
+  
+  .server-address button:hover {
+    background-color: var(--primary-dark);
+  }
+  
+  .social-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  
+  .social-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: all 0.3s;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  
+  .social-links a:hover {
+    background-color: var(--primary);
+    color: white;
+  }
+  
+  .social-links i {
+    font-size: 1.2rem;
+  }
+  
+  .join-image {
+    flex: 1;
+    position: relative;
+    height: 400px;
+  }
+  
+  .minecraft-character {
+    width: 300px;
+    height: 300px;
+    background-color: var(--primary);
+    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.2;
+  }
+  
+  /* 页脚 */
+  .minecraft-footer {
+    background-color: var(--bg-darker);
+    padding: 3rem 5%;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .footer-logo img {
+    width: 60px;
+  }
+  
+  .footer-logo span {
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  
+  .footer-links {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .footer-links a {
+    color: var(--text-secondary);
+    transition: color 0.3s;
+    text-decoration: none;
+  }
+  
+  .footer-links a:hover {
+    color: var(--primary);
+  }
+  
+  .footer-copyright {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+  }
+  
+  /* 响应式设计 */
+  @media (max-width: 1024px) {
+    .hero-section {
+      flex-direction: column;
+      text-align: center;
+      gap: 3rem;
+    }
+    
+    .hero-content {
+      max-width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .join-container {
+      flex-direction: column;
+      gap: 3rem;
+      text-align: center;
+    }
+    
+    .server-address {
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .social-links {
+      justify-content: center;
+    }
+    
+    .join-image {
+      order: -1;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .main-nav {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background-color: var(--bg-darker);
+      flex-direction: column;
+      padding: 1rem 5%;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    }
+    
+    .main-nav.active {
+      display: flex;
+    }
+    
+    .mobile-menu-btn {
+      display: block;
+    }
+    
+    .servers-grid, .features-container {
+      grid-template-columns: 1fr;
+    }
+    
+    .minecraft-character {
+      width: 200px;
+      height: 200px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .server-stats {
+      flex-direction: column;
+    }
+    
+    .hero-section h2 {
+      font-size: 2.2rem;
+    }
+    
+    .section-title {
+      font-size: 2rem;
+    }
+    
+    .join-info h2 {
+      font-size: 2rem;
+    }
+    
+    .server-address {
+      flex-direction: column;
+      gap: 1rem;
+      text-align: center;
+    }
+  }
+
+body {
+    background-image: url('2.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: #121212; /* 备用背景色 */
+}
+
+/* 确保内容可读 */
+.minecraft-header, 
+.servers-section,
+.features-section,
+.join-section {
+    background-color: rgba(30, 30, 30, 0.85);
+    backdrop-filter: blur(5px);
+    margin: 2rem auto;
+    padding: 2rem;
+    border-radius: 8px;
+    max-width: 1200px;
+}
